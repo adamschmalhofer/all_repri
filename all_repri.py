@@ -36,9 +36,11 @@ def main(directory, shift = 1):
                     new_index = 0
                 if new_index > 25:
                     new_index = 25
-                new_pri = str('({0})').format(letters[new_index])
+                new_pri = (str('({0}) ').format(letters[new_index])
+                           if shift != 0
+                           else '')
                 # write in new priority levels
-                line = re.sub(r'^\(\D\)', new_pri, line)
+                line = re.sub(r'^\(\D\)\s+', new_pri, line)
             f.write(line)
 
 
