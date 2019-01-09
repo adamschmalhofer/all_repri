@@ -14,6 +14,9 @@ level to (A) priority.
 
 Items that have no priority will stay unprioritized.
 
+In addition you have the option to remove all the priorites with the special `=0`
+shift (see example below under).
+
 ## Installation
 Clone this repo into your .todo.actions.d directory
 
@@ -29,7 +32,7 @@ as the file name of the symbolic link.
 
 `t all_repri -1` shifts all prioritized items down one level.
 
-`t all_repri 0` delete the priority from all prioritized items.
+`t all_repri =0` delete the priority from all prioritized items.
 
 ## Other Notes
 `all_repri` is written using python3

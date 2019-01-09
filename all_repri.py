@@ -27,22 +27,24 @@ def main(directory, shift = 1):
             if len(pri_test) > 0:
                 pri = re.findall(r'[A-Z]', pri_test[0])
                 pri = pri[0]
-                # get position in letters list
-                index = [i for i, s in enumerate(letters) if pri in s]
-                # find the new priority level
-                new_index = index[0] - shift
-                # some if logic so we don't go outside the bounds of our letters
-                if new_index < 0:
-                    new_index = 0
-                if new_index > 25:
-                    new_index = 25
-                new_pri = (str('({0}) ').format(letters[new_index])
-                           if shift != 0
-                           else '')
                 # write in new priority levels
-                line = re.sub(r'^\(\D\)\s+', new_pri, line)
+                line = re.sub(r'^\(\D\)\s+', new_pri(pri, shift), line)
             f.write(line)
 
+
+def new_pri(pri, shift):
+    if shift is None:
+        return ''
+    # get position in letters list
+    index = [i for i, s in enumerate(letters) if pri in s]
+    # find the new priority level
+    new_index = index[0] - shift
+    # some if logic so we don't go outside the bounds of our letters
+    if new_index < 0:
+        new_index = 0
+    if new_index > 25:
+        new_index = 25
+    return str('({0}) ').format(letters[new_index])
 
 
 if __name__ == '__main__':
@@ -52,7 +54,10 @@ if __name__ == '__main__':
 
     if os.path.isdir(sys.argv[1]):
         if len(sys.argv) is 3:
-            main(sys.argv[1], int(sys.argv[2]))
+            if sys.argv[2] == '=0':
+                main(sys.argv[1], None)
+            else:
+                main(sys.argv[1], int(sys.argv[2]))
         else:
             main(sys.argv[1])
     else:
