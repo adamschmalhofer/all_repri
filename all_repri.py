@@ -54,7 +54,7 @@ if __name__ == '__main__':
 
     if os.path.isdir(sys.argv[1]):
         if len(sys.argv) is 3:
-            if sys.argv[2] == '=0':
+            if sys.argv[2] == '_':
                 main(sys.argv[1], None)
             else:
                 main(sys.argv[1], int(sys.argv[2]))
